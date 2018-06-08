@@ -1,0 +1,52 @@
+{
+  "name": "demo-feathers-server",
+  "description": "",
+  "version": "0.0.0",
+  "homepage": "",
+  "main": "src",
+  "keywords": [
+    "feathers"
+  ],
+  "author": {
+    "name": "Max",
+    "email": "maxabcr2000@gmail.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/"
+  },
+  "engines": {
+    "node": "^8.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "scripts": {
+    "test": "npm run eslint && npm run mocha",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "start": "node src/",
+    "mocha": "mocha test/ --recursive --exit",
+    "prestart": "docker run --rm -p 5432:5432 --name postgres -e POSTGRES_PASSWORD=123456 -d postgres && sleep 5s"
+  },
+  "dependencies": {
+    "@feathersjs/configuration": "^1.0.2",
+    "@feathersjs/errors": "^3.3.0",
+    "@feathersjs/express": "^1.2.3",
+    "@feathersjs/feathers": "^3.1.6",
+    "@feathersjs/socketio": "^3.2.2",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "feathers-knex": "^3.1.1",
+    "helmet": "^3.12.1",
+    "knex": "^0.14.6",
+    "pg": "^7.4.3",
+    "serve-favicon": "^2.5.0",
+    "winston": "^2.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "mocha": "^5.2.0",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
+  }
+}
