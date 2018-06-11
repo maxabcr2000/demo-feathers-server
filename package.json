@@ -29,6 +29,9 @@
     "prestart": "docker run --rm -p 5432:5432 --name postgres -e POSTGRES_PASSWORD=123456 -d postgres && sleep 5s"
   },
   "dependencies": {
+    "@feathersjs/authentication": "^2.1.6",
+    "@feathersjs/authentication-jwt": "^2.0.1",
+    "@feathersjs/authentication-local": "^1.2.1",
     "@feathersjs/configuration": "^1.0.2",
     "@feathersjs/errors": "^3.3.0",
     "@feathersjs/express": "^1.2.3",

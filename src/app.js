@@ -15,8 +15,10 @@ const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
+const auth = require('./authentications');
 
-const app = express(feathers());
+const feathersApp = feathers();
+const app = express(feathersApp);
 
 // Load app configuration
 app.configure(configuration());
@@ -36,6 +38,7 @@ app.configure(socketio());
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
+app.configure(auth);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 // Set up event channels (see channels.js)
