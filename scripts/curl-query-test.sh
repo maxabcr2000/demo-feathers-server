@@ -1,0 +1,14 @@
+#!/bin/bash
+
+url="http://localhost"
+port="3030"
+endpoint="messages/1"
+
+
+#max
+#jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTUyODg2MDMwOSwiZXhwIjoxNTI4OTQ2NzA5LCJhdWQiOiJodHRwOi8vbG9jYWxob3N0IiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiJhbm9ueW1vdXMiLCJqdGkiOiIwNTFlZDU0OS0wYmIyLTRkZTctODUxMi04NDIyNjdmODEyMDMifQ.nkT8V0iFL-_O2bv-AScPsVA5klv0ws1_e7wHm4SdPHo"
+
+#test
+jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTUyODg2MDQ5OCwiZXhwIjoxNTI4OTQ2ODk4LCJhdWQiOiJodHRwOi8vbG9jYWxob3N0IiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiJhbm9ueW1vdXMiLCJqdGkiOiJhNDJiY2MyMC1iYTU5LTRlNzMtODg1Yy1jNzYwNGFhNzkwNzYifQ.UuYcBRBQetVfqdnqFdnFWhaSaRbmdGL2gtILYGS1Vhs"
+
+curl "$url:$port/$endpoint" -H 'Content-Type: application/json' -H "Authorization: $jwt"
