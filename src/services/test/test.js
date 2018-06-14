@@ -9,11 +9,9 @@ module.exports = function (app){
       return Promise.resolve([]);
     }
     create(data, params) {
-        console.log("params from test.create: ", params);
+      console.log("params from test.create: ", params);
 
-      return Promise.resolve({
-        text:'HaHaHa' + JSON.stringify(data)
-      });
+      return Promise.resolve(data);
     }
     update(id, data, params) {
       return Promise.resolve([]);

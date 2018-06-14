@@ -58,4 +58,8 @@ module.exports = function(app) {
   app.service('messages').publish('created', (data,context) => {
     return app.channel(app.channels).filter(connection => connection.user.username === data.receiver || connection.user.authlevel > 1);
   });
+
+  app.service('my-service').publish('created', (data,context) => {
+    return app.channel(app.channels).filter(connection => connection.user.username === data.receiver || connection.user.authlevel > 1);
+  });
 };

@@ -18,6 +18,9 @@ client.connect();
 
 client.on('notification', function(msg) {
   console.log('pgclient on notification: ', msg.payload);
+
+  const obj = JSON.parse(msg.payload);
+  app.service('my-service').create(JSON.parse(obj.data));
 });
 
 client.query('LISTEN watchers')  
