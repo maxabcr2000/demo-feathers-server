@@ -17,7 +17,7 @@ const client = new Client(app.get('pgconnection'));
 client.connect();
 
 client.on('notification', function(msg) {
-  console.log('pgclient on notification: ', msg);
+  console.log('pgclient on notification: ', msg.payload);
 });
 
 client.query('LISTEN watchers')  

@@ -16,8 +16,8 @@ module.exports = function (app) {
   db.schema.createTable('messages',table => {
     table.increments('id');
     table.string('text');
-    table.string('from');
-    table.string('to');
+    table.string('sender');
+    table.string('receiver');
     table.bigInteger('createdAt');
   }).then( () => {
     console.log('After create table');
@@ -44,7 +44,7 @@ module.exports = function (app) {
         function(context){
           console.log("find hook:", context.params);
           context.params.query = {
-            from: context.params.user.username
+            sender: context.params.user.username
           };
 
           return context;
@@ -54,7 +54,7 @@ module.exports = function (app) {
         function(context){
           console.log("get hook:", context.params);
           context.params.query = {
-            from: context.params.user.username
+            sender: context.params.user.username
           };
 
           return context;
@@ -69,7 +69,7 @@ module.exports = function (app) {
           
           context.data={
             ...data,
-            from: user.username,
+            sender: user.username,
             createdAt: new Date().getTime(),
           };
 
