@@ -25,8 +25,7 @@
     "test": "npm run eslint && npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "start": "node src/",
-    "mocha": "mocha test/ --recursive --exit",
-    "prestart": "docker run --rm -p 5432:5432 --name postgres -e POSTGRES_PASSWORD=123456 -d postgres && sleep 5s"
+    "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.6",
@@ -39,6 +38,7 @@
     "@feathersjs/socketio": "^3.2.2",
     "compression": "^1.7.2",
     "cors": "^2.8.4",
+    "feathers-hooks-common": "^4.12.0",
     "feathers-knex": "^3.1.1",
     "helmet": "^3.12.1",
     "knex": "^0.14.6",

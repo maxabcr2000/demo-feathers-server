@@ -17,6 +17,7 @@ module.exports = function(app) {
       const { user }= connection;
 
       console.log("authResult: ", authResult);
+      console.log("user:", user);
       
       // The connection is no longer anonymous, remove it
       app.channel('anonymous').leave(connection);
@@ -27,14 +28,14 @@ module.exports = function(app) {
       // Channels can be named anything and joined on any condition 
       
       // E.g. to send real-time events only to admins use
-      if(user.isAdmin) { app.channel('admins').join(connection); }
+      // if(user.isAdmin) { app.channel('admins').join(connection); }
 
       // If the user has joined e.g. chat rooms
-      if(Array.isArray(user.rooms)) user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel));
+      // if(Array.isArray(user.rooms)) user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel));
       
       // Easily organize users by email and userid for things like messaging
       // app.channel(`emails/${user.email}`).join(channel);
-      app.channel(`userIds/$(user.id}`).join(connection);
+      // app.channel(`users/${user.username}`).join(connection);
     }
   });
 
@@ -54,10 +55,7 @@ module.exports = function(app) {
   // app.service('users').publish('created', () => app.channel('admins'));
   
   // With the userid and email organization from above you can easily select involved users
-  // app.service('messages').publish(() => {
-  //   return [
-  //     app.channel(`userIds/${data.createdBy}`),
-  //     app.channel(`emails/${data.recipientEmail}`)
-  //   ];
-  // });
+  app.service('messages').publish('created', (data,context) => {
+    return app.channel(app.channels).filter(connection => connection.user.username === data.to || connection.user.authlevel > 1);
+  });
 };
