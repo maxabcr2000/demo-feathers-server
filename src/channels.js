@@ -6,6 +6,8 @@ module.exports = function(app) {
 
   app.on('connection', connection => {
     // On a new real-time connection, add it to the anonymous channel
+
+    console.log("app on connection");
     app.channel('anonymous').join(connection);
   });
 
@@ -56,10 +58,12 @@ module.exports = function(app) {
   
   // With the userid and email organization from above you can easily select involved users
   app.service('messages').publish('created', (data,context) => {
+    console.log("messages publish created event:", context);
     return app.channel(app.channels).filter(connection => connection.user.username === data.receiver || connection.user.authlevel > 1);
   });
 
   app.service('my-service').publish('created', (data,context) => {
+    //console.log("my-service publish created event:", context);
     return app.channel(app.channels).filter(connection => connection.user.username === data.receiver || connection.user.authlevel > 1);
   });
 };
