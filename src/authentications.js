@@ -38,13 +38,6 @@ class CustomVerifier {
       .then( payload => {
       console.log("Outer JWT Payload: ", payload);
 
-      // // make sure params.payload exists
-      // context.params.payload = context.params.payload || {};
-      // // merge in a `test` property
-      // Object.assign(context.params.payload, {...payload});
-
-      // return context;
-
       done(null, payload);
 
     }).catch( err => {
@@ -72,19 +65,25 @@ module.exports = function (app) {
         //disallow('external'),
         auth.hooks.authenticate(['custom']),
         context => {
-          console.log("auth before hook on create: ", context);
           
-          // const accessToken = context.data.accessToken;
-          // context.params.payload = context.params.payload || {};
-          // // merge in a `test` property
-          // Object.assign(context.params.payload, {...payload});
+          const payload = context.params.user;
+          context.params.payload = context.params.payload || {};
+          // merge in a `test` property
+          Object.assign(context.params.payload, {rle: payload.rle});
+
+          context.params.jwt = {
+            subject: payload.sub,
+            // maxAge: (payload.exp - payload.iat) * 1000
+          };
+
+          console.log("auth before hook on create: ", context);
 
           return context;
         }
       ],
-      // remove: [
-      //   auth.hooks.authenticate('jwt')
-      // ]
+      remove: [
+        auth.hooks.authenticate('custom')
+      ]
     }
   });
 };
