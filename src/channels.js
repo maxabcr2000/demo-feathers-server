@@ -59,11 +59,11 @@ module.exports = function(app) {
   // With the userid and email organization from above you can easily select involved users
   app.service('messages').publish('created', (data,context) => {
     console.log("messages publish created event:", context);
-    return app.channel(app.channels).filter(connection => connection.user.username === data.receiver || connection.user.authlevel > 1);
+    return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.authlevel > 1);
   });
 
   app.service('my-service').publish('created', (data,context) => {
     //console.log("my-service publish created event:", context);
-    return app.channel(app.channels).filter(connection => connection.user.username === data.receiver || connection.user.authlevel > 1);
+    return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.authlevel > 1);
   });
 };
