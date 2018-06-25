@@ -9,3 +9,7 @@ jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJybGUiOiJhZG1pbixib3NzLHRoZW1hbiIsIm
 
 
 curl "$url:$port/$endpoint" -H 'Content-Type: application/json' -H "Authorization: $jwt"
+
+#insert into messages (content, sender,receiver) values('Hello from myself', '408b7e03-8204-429e-9fb0-32b1637c827a', '408b7e03-8204-429e-9fb0-32b1637c827a');
+#UPDATE messages SET content='Updated contect' WHERE id = 1;
+#DELETE FROM messages where id = 1;

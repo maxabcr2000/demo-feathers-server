@@ -120,16 +120,7 @@ module.exports = function (app) {
         function(context){
           console.log("remove hook:", context.params);
 
-          // const user = context.params.user;
-          const data = context.data;
-          
-          context.data={
-            ...data,
-            // sender: user.sub,
-            createdAt: new Date().getTime(),
-          };
-
-          context.result = context.data;
+          context.result = context.params.old;
 
           return context;
         }

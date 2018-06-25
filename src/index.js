@@ -26,10 +26,10 @@ client.on('notification', function(msg) {
     app.service('messages').create(JSON.parse(obj.data));
     break;
   case 'UPDATE':
-    app.service('messages').update(JSON.parse(obj.data));
+    app.service('messages').update(null, JSON.parse(obj.data));
     break;
   case 'DELETE':
-    app.service('messages').remove(JSON.parse(obj.data));
+    app.service('messages').remove(null, {old: JSON.parse(obj.data)});
     break;
   default:
   }  
