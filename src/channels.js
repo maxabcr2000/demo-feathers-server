@@ -62,8 +62,14 @@ module.exports = function(app) {
     return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.authlevel > 1);
   });
 
-  app.service('my-service').publish('created', (data,context) => {
-    //console.log("my-service publish created event:", context);
+  app.service('messages').publish('updated', (data,context) => {
+    console.log("messages publish updated event:", context);
     return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.authlevel > 1);
   });
+
+  app.service('messages').publish('removed', (data,context) => {
+    console.log("messages publish removed event:", context);
+    return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.authlevel > 1);
+  });
+
 };

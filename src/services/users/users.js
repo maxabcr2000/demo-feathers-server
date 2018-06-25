@@ -22,11 +22,13 @@ module.exports = function (app) {
     table.string('username');
     table.string('password');
     table.integer('authlevel');
-  }).then( () => {
-    console.log('After create table');
-  }).catch( err => {
-    console.log(err);
   });
+  
+  // }).then( () => {
+  //   console.log('After create table');
+  // }).catch( err => {
+  //   console.log(err);
+  // });
 
   
   app.use('/users', service({

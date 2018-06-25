@@ -20,7 +20,20 @@ client.on('notification', function(msg) {
   console.log('pgclient on notification: ', msg.payload);
 
   const obj = JSON.parse(msg.payload);
-  app.service('my-service').create(JSON.parse(obj.data));
+
+  switch(obj.operation){
+  case 'INSERT':
+    app.service('messages').create(JSON.parse(obj.data));
+    break;
+  case 'UPDATE':
+    app.service('messages').update(JSON.parse(obj.data));
+    break;
+  case 'DELETE':
+    app.service('messages').remove(JSON.parse(obj.data));
+    break;
+  default:
+  }  
+  
 });
 
 client.query('LISTEN watchers')  
