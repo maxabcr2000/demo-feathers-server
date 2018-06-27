@@ -19,24 +19,26 @@ client.connect();
 client.on('notification', function(msg) {
   console.log('pgclient on notification: ', msg.payload);
 
-  const obj = JSON.parse(msg.payload);
+  //#TODO: Handle Row type result from postgres notification
+  const data = JSON.parse(msg.payload);
 
-  switch(obj.operation){
-  case 'INSERT':
-    app.service('messages').create(JSON.parse(obj.data));
+  switch(msg.channel){
+  case 'insert':
+    // app.service('messages').create(JSON.parse(obj.data));
+    app.service('messages').create(data);
     break;
-  case 'UPDATE':
-    app.service('messages').update(null, JSON.parse(obj.data));
+  case 'update':
+    app.service('messages').update(null, data);
     break;
-  case 'DELETE':
-    app.service('messages').remove(null, {old: JSON.parse(obj.data)});
+  case 'delete':
+    app.service('messages').remove(null, {old: data});
     break;
   default:
   }  
   
 });
 
-client.query('LISTEN watchers')  
+client.query('LISTEN insert')  
   .then(res => {
     console.log(res.rows);
   })
@@ -44,4 +46,20 @@ client.query('LISTEN watchers')
     console.error(e.stack);
   });
 
-console.log("Complete pg setting");
+client.query('LISTEN update')  
+  .then(res => {
+    console.log(res.rows);
+  })
+  .catch(e => {
+    console.error(e.stack);
+  });
+
+client.query('LISTEN delete')  
+  .then(res => {
+    console.log(res.rows);
+  })
+  .catch(e => {
+    console.error(e.stack);
+  });
+
+console.log('Complete pg setting');

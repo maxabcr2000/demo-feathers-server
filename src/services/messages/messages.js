@@ -30,26 +30,9 @@ module.exports = function (app) {
   let messagesServ = service({
     Model: db,
     name: 'messages',
-    paginate: paginate
+    paginate: paginate,
+    id: 'sender'
   });
-
-  // messagesServ.create = (data, params) => {
-  //   console.log("params from test.create: ", params);
-
-  //   return Promise.resolve(data);
-  // };
-
-  // messagesServ.update = (id, data, params) => {
-  //   console.log("params from test.update: ", params);
-
-  //   return Promise.resolve(data);
-  // };
-
-  // messagesServ.remove = (id, params) => {
-  //   console.log("params from test.remove: ", params);
-
-  //   return Promise.resolve(data);
-  // };
   
   app.use('/messages', messagesServ);
   
@@ -84,13 +67,14 @@ module.exports = function (app) {
           // const user = context.params.user;
           const data = context.data;
           
-          context.data={
-            ...data,
-            // sender: user.sub,
-            createdAt: new Date().getTime(),
-          };
+          // context.data={
+          //   ...data,
+          //   // sender: user.sub,
+          //   createdAt: new Date().getTime(),
+          // };
 
           context.result = context.data;
+          // console.log("context.result: ", context.result);
 
           return context;
         }

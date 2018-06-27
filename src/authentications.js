@@ -76,7 +76,7 @@ module.exports = function (app) {
             // maxAge: (payload.exp - payload.iat) * 1000
           };
 
-          console.log("auth before hook on create: ", context);
+          // console.log("auth before hook on create: ", context);
 
           return context;
         }
