@@ -12,7 +12,7 @@ module.exports = function (app) {
   app.use('/users', memory());
   app.service('users').hooks({
     before: {
-      all: [disallow('external')]
+      all: [disallow()]
     }
   });
   // app.configure(test);
