@@ -24,8 +24,6 @@
         "typ": "JWT"
       },
       "audience": "http://localhost",
-      // "subject": "anonymous",
-      // "issuer": "feathers",
       "algorithm": "HS256",
       "expiresIn": "1d"
     }

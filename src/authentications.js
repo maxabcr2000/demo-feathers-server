@@ -3,27 +3,16 @@ const auth = require('@feathersjs/authentication');
 const jwt = require('@feathersjs/authentication-jwt');
 const Verifier = require('@feathersjs/authentication-jwt').Verifier;
 const custom = require('feathers-authentication-custom');
-// const { disallow } = require('feathers-hooks-common');
 
 class SimpleVerifier extends Verifier {
-  // The verify function has the exact same inputs and 
-  // return values as a vanilla passport strategy
   verify(req, payload, done) {
-    // do your custom stuff. You can call internal Verifier methods
-    // and reference this.app and this.options. This method must be implemented.
 
-    // the 'user' variable can be any truthy value
-    // the 'payload' is the payload for the JWT access token that is generated after successful authentication
-    
     done(null, {}, payload);
   }
 }
 
 class CustomVerifier {
-  // The verify function has the exact same inputs and 
-  // return values as a vanilla passport strategy
   constructor(app, options) {
-    // super();
     this.app = app;
     this.options = options;
 
@@ -73,7 +62,6 @@ module.exports = function (app) {
 
           context.params.jwt = {
             subject: payload.sub,
-            // maxAge: (payload.exp - payload.iat) * 1000
           };
 
           // console.log("auth before hook on create: ", context);

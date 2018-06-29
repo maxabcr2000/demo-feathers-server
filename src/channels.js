@@ -59,17 +59,17 @@ module.exports = function(app) {
   // With the userid and email organization from above you can easily select involved users
   app.service('messages').publish('created', (data,context) => {
     console.log("messages publish created event:", context);
-    return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.authlevel > 1);
+    return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.rle.includes('admin'));
   });
 
   app.service('messages').publish('updated', (data,context) => {
     console.log("messages publish updated event:", context);
-    return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.authlevel > 1);
+    return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.rle.includes('admin'));
   });
 
   app.service('messages').publish('removed', (data,context) => {
     console.log("messages publish removed event:", context);
-    return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.authlevel > 1);
+    return app.channel(app.channels).filter(connection => connection.user.sub === data.receiver || connection.user.rle.includes('admin'));
   });
 
 };

@@ -13,7 +13,6 @@ module.exports = function (app) {
 
   const paginate = app.get('paginate');
 
-  //Create the schema
   db.schema.createTable('messages',table => {
     table.increments('id');
     table.string('content');
@@ -21,11 +20,6 @@ module.exports = function (app) {
     table.string('receiver');
     table.bigInteger('createdAt');
   });
-  // }).then( () => {
-  //   console.log('After create table');
-  // }).catch( err => {
-  //   console.log(err);
-  // });
 
   let messagesServ = service({
     Model: db,
